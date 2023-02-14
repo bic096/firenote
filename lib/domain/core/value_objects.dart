@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:notefire/domain/core/errors.dart';
 
 import 'failures.dart';
 
@@ -7,6 +8,13 @@ import 'failures.dart';
 abstract class ValueObject<T> {
   Either<ValueFailure<T>, T> get value;
   const ValueObject();
+
+  /// Without using `identity`, you must write a function to return
+  /// the input parameter `(l) => l`.
+  T getOrCrash() {
+    return value.fold((f) => throw UnexpectedValueError(f), id);
+  }
+
   bool isValid() => value.isRight();
   @override
   String toString() => 'ValueObject: $value';

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+import 'package:notefire/injection.dart';
 
 void main() {
+  configureInjection(Environment.dev);
   runApp(const MyApp());
 }
 
