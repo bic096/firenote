@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:notefire/domain/auth/i_auth_facade.dart';
 import 'package:notefire/domain/auth/value_objects.dart';
 
-import '../../domain/auth/auth_failure.dart';
+import '../../../domain/auth/auth_failure.dart';
 
 part 'sign_in_form_event.dart';
 part 'sign_in_form_state.dart';

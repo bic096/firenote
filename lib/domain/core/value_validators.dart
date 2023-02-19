@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:kt_dart/kt.dart';
 
-import './failures.dart';
+import '../core/failures.dart';
 
 /// the file where all value validators live
 Either<ValueFailure<String>, String> validateEmailAddress(String val) {
@@ -20,5 +21,45 @@ Either<ValueFailure<String>, String> validatePassword(String val) {
     return right(val);
   } else {
     return left(ValueFailure.invalidPassword(val));
+  }
+}
+
+Either<ValueFailure<String>, String> validateMaxStringLength(
+    String input, int max) {
+  if (input.length <= max) {
+    return right(input);
+  } else {
+    return left(
+      ValueFailure.exceedingLength(failedValue: input, max: max),
+    );
+  }
+}
+
+Either<ValueFailure<String>, String> validatStringNotEmpty(String input) {
+  if (input.isNotEmpty) {
+    return right(input);
+  } else {
+    return left(
+      ValueFailure.empty(failedValue: input),
+    );
+  }
+}
+
+Either<ValueFailure<String>, String> validateSingleLine(String input) {
+  if (!input.contains('\n')) {
+    return right(input);
+  } else {
+    return left(
+      ValueFailure.multiLines(failedValue: input),
+    );
+  }
+}
+
+Either<ValueFailure<KtList<T>>, KtList<T>> validateMaxListlength<T>(
+    KtList<T> input, int max) {
+  if (input.size <= max) {
+    return right(input);
+  } else {
+    return left(ValueFailure.listTooLonge(failedValue: input, max: max));
   }
 }
